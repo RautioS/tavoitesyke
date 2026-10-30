@@ -5,9 +5,11 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 export default function App() {
 
   const [age, setage] = useState('')
-  const ageAsNumber: number = !isNaN(Number(age)) === true ? Number(age) : 0
-  const lowerLimit = (220 - ageAsNumber) * 0.65
-  const upperLimit = (220 - ageAsNumber) * 0.85
+
+  const parsedAge = Number(age.trim())
+  const isValidAge = !isNaN(parsedAge) && age.trim() !== '' && parsedAge > 0
+  const lowerLimit = isValidAge ? (220 - parsedAge) * 0.65 : 0
+  const upperLimit = isValidAge ? (220 - parsedAge) * 0.85 : 0
 
   return (
     <View style={styles.container}>
